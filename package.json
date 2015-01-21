@@ -1,0 +1,23 @@
+{
+  "name": "memori",
+  "version": "0.0.1",
+  "description": "memori",
+  "main": "index.js",
+  "scripts": {
+    "test": "make MOCHA_OPTS='-C -R dot' test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zand3rs/memori.git"
+  },
+  "keywords": [
+    "memori",
+    "cache"
+  ],
+  "author": "Alexander Magtipon",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zand3rs/memori/issues"
+  },
+  "homepage": "https://github.com/zand3rs/memori"
+}
