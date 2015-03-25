@@ -19,5 +19,16 @@
   "bugs": {
     "url": "https://github.com/zand3rs/memori/issues"
   },
-  "homepage": "https://github.com/zand3rs/memori"
+  "homepage": "https://github.com/zand3rs/memori",
+  "devDependencies": {
+    "async": "^0.9.0",
+    "chai": "^2.1.2",
+    "mocha": "^2.2.1",
+    "sinon": "^1.14.1"
+  },
+  "dependencies": {
+    "lodash": "^3.5.0",
+    "path": "^0.11.14",
+    "redis": "^0.12.1"
+  }
 }
