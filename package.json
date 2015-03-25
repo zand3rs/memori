@@ -1,7 +1,7 @@
 {
   "name": "memori",
-  "version": "0.0.1",
-  "description": "memori",
+  "version": "0.1.0",
+  "description": "A simple in-memory cache using redis as the default storage. Supports object and number values.",
   "main": "index.js",
   "scripts": {
     "test": "make MOCHA_OPTS='-C -R dot' test"
@@ -12,10 +12,11 @@
   },
   "keywords": [
     "memori",
-    "cache"
+    "cache",
+    "storage"
   ],
   "author": "Alexander Magtipon",
-  "license": "MIT",
+  "license": "ISC",
   "bugs": {
     "url": "https://github.com/zand3rs/memori/issues"
   },
