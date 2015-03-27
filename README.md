@@ -102,7 +102,20 @@ cache.decr("counter", function(err, value) {
 });
 ```
 
-* keys()
+### keys(pattern, callback)
+
+Returns all keys matching pattern.  
+Supported glob-style patterns:
+* h?llo matches hello, hallo and hxllo
+* h\*llo matches hllo and heeeello
+* h[ae]llo matches hello and hallo
+
+```javascript
+cache.keys("key*", function(err, values) {
+  console.log(err, values);
+});
+```
+
 * push()
 * pop()
 
