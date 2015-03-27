@@ -1,7 +1,7 @@
 {
   "name": "memori",
-  "version": "0.2.1",
-  "description": "A simple in-memory cache/queue using redis as the default storage. Supports object and number values.",
+  "version": "0.2.2",
+  "description": "A simple in-memory cache/queue using redis as the default storage. Supports string, number and object values.",
   "main": "index.js",
   "scripts": {
     "test": "make MOCHA_OPTS='-C -R dot' test"
