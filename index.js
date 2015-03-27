@@ -71,4 +71,16 @@ Memori.prototype.keys = function(key, done) {
   this.client.keys(key, done);
 };
 
+//------------------------------------------------------------------------------
+
+Memori.prototype.push = function(key, value, done) {
+  this.client.push(key, value, done);
+};
+
+//------------------------------------------------------------------------------
+
+Memori.prototype.pop = function(key, done) {
+  this.client.pop(key, done);
+};
+
 //==============================================================================
