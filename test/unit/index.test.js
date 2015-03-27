@@ -193,127 +193,62 @@ describe("Memori", function() {
       });
     });
 
-    describe("when list type is queue (default)", function() {
+    describe("#push", function() {
       before(function(done) {
-        queue = new Memori();
-        queue.del("queue1", done);
+        cache.del("queue1", done);
       });
-      describe("#push", function() {
-        it("should push value into queue using the given key", function(done) {
-          async.series([
-            function(next) {
-              queue.push("queue1", "queue1 value1", function(err, result) {
-                expect(err).to.not.exist;
-                expect(result).to.equal(1);
-                next();
-              });
-            },
-            function(next) {
-              queue.push("queue1", "queue1 value2", function(err, result) {
-                expect(err).to.not.exist;
-                expect(result).to.equal(2);
-                next();
-              });
-            },
-            function(next) {
-              queue.push("queue1", "queue1 value3", function(err, result) {
-                expect(err).to.not.exist;
-                expect(result).to.equal(3);
-                next();
-              });
-            }
-          ], done);
-        });
-      });
-
-      describe("#pop", function() {
-        it("should pop value from queue using the given key", function(done) {
-          async.series([
-            function(next) {
-              queue.pop("queue1", function(err, value) {
-                expect(err).to.not.exist;
-                expect(value).to.equal("queue1 value1");
-                next();
-              });
-            },
-            function(next) {
-              queue.pop("queue1", function(err, value) {
-                expect(err).to.not.exist;
-                expect(value).to.equal("queue1 value2");
-                next();
-              });
-            },
-            function(next) {
-              queue.pop("queue1", function(err, value) {
-                expect(err).to.not.exist;
-                expect(value).to.equal("queue1 value3");
-                next();
-              });
-            }
-          ], done);
-        });
+      it("should push value into queue using the given key", function(done) {
+        async.series([
+          function(next) {
+            cache.push("queue1", "queue1 value1", function(err, result) {
+              expect(err).to.not.exist;
+              expect(result).to.equal(1);
+              next();
+            });
+          },
+          function(next) {
+            cache.push("queue1", "queue1 value2", function(err, result) {
+              expect(err).to.not.exist;
+              expect(result).to.equal(2);
+              next();
+            });
+          },
+          function(next) {
+            cache.push("queue1", "queue1 value3", function(err, result) {
+              expect(err).to.not.exist;
+              expect(result).to.equal(3);
+              next();
+            });
+          }
+        ], done);
       });
     });
 
-    describe("when list type is stack", function() {
-      before(function(done) {
-        stack = new Memori({listType: "stack"});
-        stack.del("stack1", done);
-      });
-      describe("#push", function() {
-        it("should push value into stack using the given key", function(done) {
-          async.series([
-            function(next) {
-              stack.push("stack1", "stack1 value3", function(err, result) {
-                expect(err).to.not.exist;
-                expect(result).to.equal(1);
-                next();
-              });
-            },
-            function(next) {
-              stack.push("stack1", "stack1 value2", function(err, result) {
-                expect(err).to.not.exist;
-                expect(result).to.equal(2);
-                next();
-              });
-            },
-            function(next) {
-              stack.push("stack1", "stack1 value1", function(err, result) {
-                expect(err).to.not.exist;
-                expect(result).to.equal(3);
-                next();
-              });
-            }
-          ], done);
-        });
-      });
-
-      describe("#pop", function() {
-        it("should pop value from stack using the given key", function(done) {
-          async.series([
-            function(next) {
-              stack.pop("stack1", function(err, value) {
-                expect(err).to.not.exist;
-                expect(value).to.equal("stack1 value1");
-                next();
-              });
-            },
-            function(next) {
-              stack.pop("stack1", function(err, value) {
-                expect(err).to.not.exist;
-                expect(value).to.equal("stack1 value2");
-                next();
-              });
-            },
-            function(next) {
-              stack.pop("stack1", function(err, value) {
-                expect(err).to.not.exist;
-                expect(value).to.equal("stack1 value3");
-                next();
-              });
-            }
-          ], done);
-        });
+    describe("#pop", function() {
+      it("should pop value from queue using the given key", function(done) {
+        async.series([
+          function(next) {
+            cache.pop("queue1", function(err, value) {
+              expect(err).to.not.exist;
+              expect(value).to.equal("queue1 value1");
+              next();
+            });
+          },
+          function(next) {
+            cache.pop("queue1", function(err, value) {
+              expect(err).to.not.exist;
+              expect(value).to.equal("queue1 value2");
+              next();
+            });
+          },
+          function(next) {
+            cache.pop("queue1", function(err, value) {
+              expect(err).to.not.exist;
+              expect(value).to.equal("queue1 value3");
+              next();
+            });
+          }
+        ], done);
       });
     });
 
