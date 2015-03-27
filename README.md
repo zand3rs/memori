@@ -1,6 +1,6 @@
 # memori
 
-A simple in-memory cache/queue using [Redis](http://redis.io/) as the default storage. Supports object and number values.
+A simple in-memory cache/queue using [Redis](http://redis.io/) as the default storage. Supports string, number and object values.
 
 
 ## Dependencies
@@ -21,12 +21,27 @@ var Memori = require("memori");
 var cache = new Memori();
 
 //-- set
-cache.set("key", "value", function(err, result) {
+cache.set("string", "foo", function(err, result) {
+  console.log(err, result);
+});
+cache.set("number", 2, function(err, result) {
+  console.log(err, result);
+});
+cache.set("object", { data: { key: "val" } }, function(err, result) {
   console.log(err, result);
 });
 
 //-- get
-cache.get("key", function(err, value) {
+cache.get("string", function(err, value) {
+  //-- value: "foo"
+  console.log(err, value);
+});
+cache.get("number", function(err, value) {
+  //-- value: 2
+  console.log(err, value);
+});
+cache.get("object", function(err, value) {
+  //-- value: { data: { key: "val" } }
   console.log(err, value);
 });
 ```
@@ -116,7 +131,44 @@ cache.keys("key*", function(err, values) {
 });
 ```
 
-* push()
-* pop()
+### push(key, value, callback)
 
+Push value at the head of the list stored at key. If key does not exist, it is created as empty list before performing the push operations. When key holds a value that is not a list, an error is returned. It returns the length of the list after the push operations.
 
+```javascript
+cache.push("queue", "q1", function(err, result) {
+  console.log(err, result);
+});
+```
+
+### pop(key, callback)
+
+Removes and returns the last element of the list stored at key.
+
+```javascript
+cache.pop("queue", function(err, value) {
+  console.log(err, value);
+});
+```
+
+## Options
+
+The constructor accepts the ff. options:
+
+* host
+* port
+* database
+* username
+* password
+* ttl
+* prefix
+
+```javascript
+var Memori = require("memori");
+var cache = new Memori({
+  host: "localhost",
+  port: 6379,
+  ttl: 300, //-- set default ttl to 300 secs (5mins)
+  prefix: "my_cache:" //-- set key prefix
+});
+```
