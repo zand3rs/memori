@@ -67,8 +67,8 @@ Memori.prototype.decr = function(key, done) {
 
 //------------------------------------------------------------------------------
 
-Memori.prototype.keys = function(key, done) {
-  this.client.keys(key, done);
+Memori.prototype.keys = function(pattern, done) {
+  this.client.keys(pattern, done);
 };
 
 //------------------------------------------------------------------------------

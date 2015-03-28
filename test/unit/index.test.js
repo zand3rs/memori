@@ -178,7 +178,7 @@ describe("Memori", function() {
         ], done);
       });
 
-      it("should return cache keys using the given key", function(done) {
+      it("should return cache keys using the given pattern", function(done) {
         cache.keys("key-*", function(err, value) {
           expect(err).to.not.exist;
           expect(value).to.include("key-01");
