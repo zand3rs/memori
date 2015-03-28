@@ -12,16 +12,12 @@ describe("Memori", function() {
       var cache = new Memori({
         host: "test_host",
         port: 9999,
-        database: "test_database",
-        username: "test_username",
-        password: "test_password",
+        db: 1,
         ttl: 8888
       });
       expect(cache.client.host).to.equal("test_host");
       expect(cache.client.port).to.equal(9999);
-      expect(cache.client.database).to.equal("test_database");
-      expect(cache.client.username).to.equal("test_username");
-      expect(cache.client.password).to.equal("test_password");
+      expect(cache.client.db).to.equal(1);
       expect(cache.client.ttl).to.equal(8888);
     });
   });
