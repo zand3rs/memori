@@ -1,6 +1,6 @@
 {
   "name": "memori",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "A simple in-memory cache/queue using redis as the default storage. Supports string, number and json values.",
   "main": "index.js",
   "scripts": {
@@ -12,6 +12,8 @@
   },
   "keywords": [
     "memori",
+    "memory",
+    "memcache",
     "cache",
     "storage",
     "queue",
