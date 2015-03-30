@@ -16,7 +16,7 @@ module.exports = Memori;
 
 function Memori(options) {
   var _options = _.merge({adapter: "redis"}, options);
-  var _module = path.resolve(".", "lib", "adapters", _options.adapter);
+  var _module = path.join(__dirname, "lib", "adapters", _options.adapter);
   var _adapter = require(_module);
   this._client = new _adapter(_options);
 

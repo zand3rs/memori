@@ -1,6 +1,6 @@
 {
   "name": "memori",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "A simple in-memory cache/queue using redis as the default storage. Supports string, number and json values.",
   "main": "index.js",
   "scripts": {
