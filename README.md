@@ -1,6 +1,6 @@
 # memori
 
-A simple cache/queue using [Redis](http://redis.io/) as the default storage. Supports storing of any data type.
+A simple cache/queue using [Redis](http://redis.io/) as the default storage. Supports any data type.
 
 
 ## Dependencies
