@@ -1,6 +1,6 @@
 # memori
 
-A simple in-memory cache/queue using [Redis](http://redis.io/) as the default storage. Supports storing of any data type.
+A simple cache/queue using [Redis](http://redis.io/) as the default storage. Supports storing of any data type.
 
 
 ## Dependencies
@@ -27,7 +27,7 @@ cache.set("string", "foo", function(err, result) {
 cache.set("number", 2, function(err, result) {
   console.log(err, result);
 });
-cache.set("json", { data: { key: "val" } }, function(err, result) {
+cache.set("object", { data: { key: "val" } }, function(err, result) {
   console.log(err, result);
 });
 
@@ -40,7 +40,7 @@ cache.get("number", function(err, value) {
   //-- value: 2
   console.log(err, value);
 });
-cache.get("json", function(err, value) {
+cache.get("object", function(err, value) {
   //-- value: { data: { key: "val" } }
   console.log(err, value);
 });
@@ -51,7 +51,7 @@ cache.get("json", function(err, value) {
 ### set(key, value, callback)
 ### set(key, value, ttl, callback)
 
-Set the value of key. If key already holds a value, it is overwritten, regardless of its type. Any previous time to live associated with the key is discarded on successful operation. The ttl unit is in seconds and value could be any of _string, number or json_. If ttl is not provided, the default ttl of 0 is used which means no expiration.
+Set the value of key. If key already holds a value, it is overwritten, regardless of its type. Any previous time to live associated with the key is discarded on successful operation. The ttl unit is in seconds and value could be of any data type. If ttl is not provided, the default ttl of 0 is used which means no expiration.
 
 ```javascript
 //-- set key without expiration

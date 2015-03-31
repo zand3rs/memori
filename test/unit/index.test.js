@@ -42,6 +42,41 @@ describe("Memori", function() {
           done();
         });
       });
+      it("should store integers", function(done) {
+        cache.set("integer", 1, function(err, result) {
+          expect(err).to.not.exist;
+          expect(result).to.equal("OK");
+          done();
+        });
+      });
+      it("should store floats", function(done) {
+        cache.set("float", 1.2, function(err, result) {
+          expect(err).to.not.exist;
+          expect(result).to.equal("OK");
+          done();
+        });
+      });
+      it("should store booleans", function(done) {
+        cache.set("bool", false, function(err, result) {
+          expect(err).to.not.exist;
+          expect(result).to.equal("OK");
+          done();
+        });
+      });
+      it("should store arrays", function(done) {
+        cache.set("array", [1, "2", 3.4], function(err, result) {
+          expect(err).to.not.exist;
+          expect(result).to.equal("OK");
+          done();
+        });
+      });
+      it("should store objects", function(done) {
+        cache.set("object", {data: {string: "string", integer: 9}}, function(err, result) {
+          expect(err).to.not.exist;
+          expect(result).to.equal("OK");
+          done();
+        });
+      });
     });
 
     describe("#get", function() {
@@ -58,6 +93,41 @@ describe("Memori", function() {
           expect(err).to.not.exist;
           expect(result).to.include("instance value");
           expect(result).to.include("instance value2");
+          done();
+        });
+      });
+      it("should retrieve integers", function(done) {
+        cache.get("integer", function(err, value) {
+          expect(err).to.not.exist;
+          expect(value).to.equal(1);
+          done();
+        });
+      });
+      it("should retrieve floats", function(done) {
+        cache.get("float", function(err, value) {
+          expect(err).to.not.exist;
+          expect(value).to.equal(1.2);
+          done();
+        });
+      });
+      it("should retrieve booleans", function(done) {
+        cache.get("bool", function(err, value) {
+          expect(err).to.not.exist;
+          expect(value).to.equal(false);
+          done();
+        });
+      });
+      it("should retrieve arrays", function(done) {
+        cache.get("array", function(err, value) {
+          expect(err).to.not.exist;
+          expect(value).to.eql([1, "2", 3.4]);
+          done();
+        });
+      });
+      it("should retrieve objects", function(done) {
+        cache.get("object", function(err, value) {
+          expect(err).to.not.exist;
+          expect(value).to.eql({data: {string: "string", integer: 9}});
           done();
         });
       });
