@@ -1,6 +1,6 @@
 # memori
 
-A simple in-memory cache/queue using [Redis](http://redis.io/) as the default storage. Supports string, number and json values.
+A simple in-memory cache/queue using [Redis](http://redis.io/) as the default storage. Supports storing of any data type.
 
 
 ## Dependencies
