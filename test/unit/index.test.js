@@ -20,14 +20,74 @@ describe("Memori", function() {
       expect(cache.client.db).to.equal(1);
       expect(cache.client.ttl).to.equal(8888);
     });
-  });
 
-  describe("methods", function() {
-    before(function() {
-      cache = new Memori();
+    describe("with prefix", function() {
+      var defaultPrefix = "";
+
+      before(function() {
+        var cache = new Memori({ prefix: "" });
+        defaultPrefix = cache.client.prefix;
+      });
+
+      it("should set the correct prefix", function() {
+        var cache = new Memori({ prefix: "" });
+        expect(cache.client.prefix).to.equal(defaultPrefix);
+
+        var cache = new Memori({ prefix: "foo" });
+        expect(cache.client.prefix).to.equal(defaultPrefix + "foo:");
+
+        var cache = new Memori({ prefix: "bar:" });
+        expect(cache.client.prefix).to.equal(defaultPrefix + "bar:");
+      });
     });
 
-    describe("#set", function() {
+    describe("with identity", function() {
+      var defaultPrefix = "";
+
+      before(function() {
+        var cache = new Memori();
+        defaultPrefix = cache.client.prefix;
+      });
+
+      it("should set the identity property", function() {
+        var cache = new Memori({ identity: "object_identity" });
+        expect(cache.client.identity).to.equal("object_identity");
+      });
+
+      it("should set the correct prefix", function() {
+        var cache = new Memori({ identity: "bar" });
+        expect(cache.client.prefix).to.equal(defaultPrefix + "bar:");
+
+        var cache = new Memori({ prefix: "foo", identity: "bar" });
+        expect(cache.client.prefix).to.equal(defaultPrefix + "foo:bar:");
+      });
+    });
+  });
+
+  describe("methods and properties", function() {
+    var defaultPrefix = "";
+
+    before(function() {
+      cache = new Memori();
+      defaultPrefix = cache.client.prefix;
+    });
+
+    describe("#identity", function() {
+      it("should be set", function() {
+        expect(cache.client.identity).to.equal("");
+        cache.client.identity = "object_identity";
+        expect(cache.client.identity).to.equal("object_identity");
+        cache.client.identity = "object_identity:";
+        expect(cache.client.identity).to.equal("object_identity");
+      });
+
+      it("should set the correct prefix", function() {
+        cache.client.identity = "object_id";
+        expect(cache.client.prefix).to.equal(defaultPrefix + "object_id:");
+      });
+    });
+
+    describe("#set()", function() {
       it("should store value into cache using the given key", function(done) {
         cache.set("instance_key", "instance value", function(err, result) {
           expect(err).to.not.exist;
@@ -79,7 +139,7 @@ describe("Memori", function() {
       });
     });
 
-    describe("#get", function() {
+    describe("#get()", function() {
       it("should return value from cache using the given key", function(done) {
         cache.get("instance_key", function(err, value) {
           expect(err).to.not.exist;
@@ -133,7 +193,7 @@ describe("Memori", function() {
       });
     });
 
-    describe("#del", function() {
+    describe("#del()", function() {
       before(function(done) {
         async.series([
           function(next) {
@@ -183,7 +243,7 @@ describe("Memori", function() {
       });
     });
 
-    describe("#incr", function() {
+    describe("#incr()", function() {
       before(function(done) {
         cache.del("counter", done);
       });
@@ -208,7 +268,7 @@ describe("Memori", function() {
       });
     });
 
-    describe("#decr", function() {
+    describe("#decr()", function() {
       before(function(done) {
         cache.del("counter", done);
       });
@@ -233,7 +293,7 @@ describe("Memori", function() {
       });
     });
 
-    describe("#keys", function() {
+    describe("#keys()", function() {
       before(function(done) {
         async.series([
           function(next) {
@@ -259,7 +319,7 @@ describe("Memori", function() {
       });
     });
 
-    describe("#push", function() {
+    describe("#push()", function() {
       before(function(done) {
         cache.del("queue1", done);
       });
@@ -290,7 +350,7 @@ describe("Memori", function() {
       });
     });
 
-    describe("#pop", function() {
+    describe("#pop()", function() {
       it("should pop value from queue using the given key", function(done) {
         async.series([
           function(next) {
