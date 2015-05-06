@@ -17,8 +17,8 @@ MOCHA_BIN=mocha
 MOCHA_DEFAULT_OPTS=--recursive -t 30000
 MOCHA_OPTS=-R spec
 
-ifneq "$(wildcard ./node_modules/sails-test-helper/node_modules/.bin/mocha)" ""
-    MOCHA_BIN=./node_modules/sails-test-helper/node_modules/.bin/mocha
+ifneq "$(wildcard ./node_modules/node-test-helper/node_modules/.bin/mocha)" ""
+    MOCHA_BIN=./node_modules/node-test-helper/node_modules/.bin/mocha
 endif
 ifneq "$(wildcard ./node_modules/.bin/mocha)" ""
     MOCHA_BIN=./node_modules/.bin/mocha

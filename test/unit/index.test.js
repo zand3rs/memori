@@ -1,11 +1,6 @@
-var async = require("async"),
-    sinon = require("sinon"),
-    chai = require("chai"),
-    expect = chai.expect,
-    stub = sinon.stub,
-    Memori = require(process.cwd());
+require("node-test-helper");
 
-describe("Memori", function() {
+describe(TEST_NAME, function() {
 
   describe("constructor", function() {
     it("accepts params", function() {
