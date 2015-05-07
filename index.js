@@ -15,14 +15,14 @@ module.exports = Memori;
 //-- constructor
 
 function Memori(options) {
-  var _options = _.merge({adapter: "redis"}, options);
+  var _options = _.merge({adapter: "memory"}, options);
   var _module = path.join(__dirname, "lib", "adapters", _options.adapter);
   var _adapter = require(_module);
-  this._client = new _adapter(_options);
+  this._adapter = new _adapter(_options);
 
-  Object.defineProperty(this, "client", {
+  Object.defineProperty(this, "adapter", {
     get: function() {
-      return this._client;
+      return this._adapter.adapter;
     }
   });
 }
@@ -31,56 +31,56 @@ function Memori(options) {
 //-- public instance methods
 
 Memori.prototype.set = function(key, value, done) {
-  this.client.set(key, value, done);
+  this._adapter.set(key, value, done);
 };
 
 //------------------------------------------------------------------------------
 //-- fake overloading, this is the real definition
 
 Memori.prototype.set = function(key, value, ttl, done) {
-  this.client.set(key, value, ttl, done);
+  this._adapter.set(key, value, ttl, done);
 };
 
 //------------------------------------------------------------------------------
 
 Memori.prototype.get = function(key, done) {
-  this.client.get(key, done);
+  this._adapter.get(key, done);
 };
 
 //------------------------------------------------------------------------------
 
 Memori.prototype.del = function(key, done) {
-  this.client.del(key, done);
+  this._adapter.del(key, done);
 };
 
 //------------------------------------------------------------------------------
 
 Memori.prototype.incr = function(key, done) {
-  this.client.incr(key, done);
+  this._adapter.incr(key, done);
 };
 
 //------------------------------------------------------------------------------
 
 Memori.prototype.decr = function(key, done) {
-  this.client.decr(key, done);
+  this._adapter.decr(key, done);
 };
 
 //------------------------------------------------------------------------------
 
 Memori.prototype.keys = function(pattern, done) {
-  this.client.keys(pattern, done);
+  this._adapter.keys(pattern, done);
 };
 
 //------------------------------------------------------------------------------
 
 Memori.prototype.push = function(key, value, done) {
-  this.client.push(key, value, done);
+  this._adapter.push(key, value, done);
 };
 
 //------------------------------------------------------------------------------
 
 Memori.prototype.pop = function(key, done) {
-  this.client.pop(key, done);
+  this._adapter.pop(key, done);
 };
 
 //==============================================================================
