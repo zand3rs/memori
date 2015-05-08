@@ -1,6 +1,6 @@
 # memori
 
-A simple cache/queue using [Redis](http://redis.io/) as the default storage. Supports any data type.
+A simple cache/queue library with multiple storage and data type support.
 
 
 ## Dependencies
@@ -151,23 +151,45 @@ cache.pop("queue", function(err, value) {
 });
 ```
 
+## Properties
+
+### adapter
+
+Returns the name of the active adapter.
+
+```javascript
+console.log("adapter:", cache.adapter);
+```
+
+### identity
+
+Sets the cache identity for added flexibility and cache key uniqueness.
+
+```javascript
+cache.identity = "my_identity";
+```
+
 ## Options
 
 The constructor accepts the ff. options:
 
+* adapter
 * host
 * port
 * db
 * ttl
 * prefix
+* identity
 
 ```javascript
 var Memori = require("memori");
 var cache = new Memori({
+  adapter: "redis", //-- defaults to "memory" when not provided
   host: "localhost",
   port: 6379,
   db: 1, //-- use db 1 instead of the default 0
   ttl: 300, //-- set default ttl to 300 secs (5mins)
-  prefix: "my_cache:" //-- set key prefix
+  prefix: "my_cache:", //-- set key prefix
+  identity: "my_identity" //-- for additional key uniqueness
 });
 ```
