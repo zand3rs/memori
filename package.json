@@ -1,6 +1,6 @@
 {
   "name": "memori",
-  "version": "0.2.10",
+  "version": "0.3.0",
   "description": "A simple cache/queue library with multiple storage and data type support.",
   "main": "index.js",
   "scripts": {
