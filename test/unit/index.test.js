@@ -22,6 +22,26 @@ describe(TEST_NAME, function() {
     });
   });
 
+  describe("instance properties", function() {
+    describe("#adapter", function() {
+      it("should return the name of the active adapter", function() {
+        var cache = new Memori({adapter: "redis"});
+        expect(cache.adapter).to.equal("redis");
+      });
+    });
+
+    describe("#identity", function() {
+      it("should be set", function() {
+        var cache = new Memori({identity: "initial_identity"});
+        expect(cache.identity).to.equal("initial_identity");
+        cache.identity = "object_identity";
+        expect(cache.identity).to.equal("object_identity");
+        cache.identity = "object_identity:";
+        expect(cache.identity).to.equal("object_identity");
+      });
+    });
+  });
+
   describe("instance methods", function() {
     var cache = null;
     var fakeAdapter = null;
