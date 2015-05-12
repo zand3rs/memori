@@ -3,9 +3,10 @@
 A simple cache/queue library with multiple storage and data type support.
 
 
-## Dependencies
+## Available adapters
 
-* [Redis](https://github.com/mranney/node_redis)
+* memory (default)
+* redis
 
 
 ## Installation
