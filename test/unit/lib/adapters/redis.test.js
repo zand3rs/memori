@@ -215,25 +215,49 @@ describe(TEST_NAME, function() {
 
   describe("#keys()", function() {
     before(function(done) {
-      async.series([
-        function(next) {
-          redis.set("key-01", "value 01", next);
-        },
-        function(next) {
-          redis.set("key-02", "value 02", next);
-        },
-        function(next) {
-          redis.set("key-03", "value 03", next);
-        }
-      ], done);
+      async.eachSeries([
+        "hello",
+        "hallo",
+        "hxllo",
+        "heaxllo",
+        "olleh"
+      ], function(item, next) {
+        redis.set(item, item, next);
+      }, done);
     });
 
-    it("should return cache keys using the given pattern", function(done) {
-      redis.keys("key-*", function(err, value) {
+    it("should return cache keys using the given pattern: h*llo", function(done) {
+      redis.keys("h*llo", function(err, value) {
         expect(err).to.not.exist;
-        expect(value).to.include("key-01");
-        expect(value).to.include("key-02");
-        expect(value).to.include("key-03");
+        expect(value).to.include("hello");
+        expect(value).to.include("hallo");
+        expect(value).to.include("hxllo");
+        expect(value).to.include("heaxllo");
+        expect(value).to.not.include("olleh");
+        done();
+      });
+    });
+
+    it("should return cache keys using the given pattern: h?llo", function(done) {
+      redis.keys("h?llo", function(err, value) {
+        expect(err).to.not.exist;
+        expect(value).to.include("hello");
+        expect(value).to.include("hallo");
+        expect(value).to.include("hxllo");
+        expect(value).to.not.include("heaxllo");
+        expect(value).to.not.include("olleh");
+        done();
+      });
+    });
+
+    it("should return cache keys using the given pattern: h[ae]llo", function(done) {
+      redis.keys("h[ae]llo", function(err, value) {
+        expect(err).to.not.exist;
+        expect(value).to.include("hello");
+        expect(value).to.include("hallo");
+        expect(value).to.not.include("hxllo");
+        expect(value).to.not.include("heaxllo");
+        expect(value).to.not.include("olleh");
         done();
       });
     });
