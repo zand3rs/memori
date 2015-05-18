@@ -8,12 +8,14 @@ describe(TEST_NAME, function() {
         host: "test_host",
         port: 9999,
         db: 1,
-        ttl: 8888
+        ttl: 8888,
+        maxClients: 9
       });
       expect(adapter.host).to.equal("test_host");
       expect(adapter.port).to.equal(9999);
       expect(adapter.db).to.equal(1);
       expect(adapter.ttl).to.equal(8888);
+      expect(adapter.maxClients).to.equal(9);
     });
 
     describe("with prefix", function() {
@@ -66,23 +68,6 @@ describe(TEST_NAME, function() {
     before(function() {
       adapter = new Adapter();
       defaultPrefix = adapter.prefix;
-    });
-
-    describe("#identity", function() {
-      it("should be set", function() {
-        expect(adapter.identity).to.equal("");
-        adapter.identity = "object_identity";
-        expect(adapter.identity).to.equal("object_identity");
-        adapter.identity = "object_identity:";
-        expect(adapter.identity).to.equal("object_identity");
-      });
-
-      it("should set the correct prefix", function() {
-        adapter.identity = "object_id";
-        expect(adapter.prefix).to.equal(defaultPrefix + "object_id:");
-        adapter.identity = "";
-        expect(adapter.prefix).to.equal(defaultPrefix);
-      });
     });
 
     describe("#set()", function() {

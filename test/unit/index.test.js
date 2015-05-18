@@ -31,13 +31,9 @@ describe(TEST_NAME, function() {
     });
 
     describe("#identity", function() {
-      it("should be set", function() {
-        var cache = new Memori({identity: "initial_identity"});
-        expect(cache.identity).to.equal("initial_identity");
-        cache.identity = "object_identity";
-        expect(cache.identity).to.equal("object_identity");
-        cache.identity = "object_identity:";
-        expect(cache.identity).to.equal("object_identity");
+      it("should return the identity of the active adapter", function() {
+        var cache = new Memori({identity: "cache_identity"});
+        expect(cache.identity).to.equal("cache_identity");
       });
     });
   });

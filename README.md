@@ -164,10 +164,10 @@ console.log("adapter:", cache.adapter);
 
 ### identity
 
-Sets the cache identity for added flexibility and cache key uniqueness.
+Returns the identity of the active adapter.
 
 ```javascript
-cache.identity = "my_identity";
+console.log("identity:", cache.identity);
 ```
 
 ## Options
@@ -191,6 +191,6 @@ var cache = new Memori({
   db: 1, //-- use db 1 instead of the default 0
   ttl: 300, //-- set default ttl to 300 secs (5mins)
   prefix: "my_cache:", //-- set key prefix
-  identity: "my_identity" //-- for additional key uniqueness
+  identity: "my_identity" //-- for additional cache key uniqueness
 });
 ```

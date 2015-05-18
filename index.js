@@ -26,9 +26,6 @@ function Memori(options) {
   Object.defineProperty(this, "identity", {
     get: function() {
       return this._adapter.identity;
-    },
-    set: function(identity) {
-      this._adapter.identity = identity;
     }
   });
 }
