@@ -15,17 +15,22 @@ var path = require("path");
 function Memori(options) {
   var _options = _.merge({adapter: "memory"}, options);
   var _module = path.join(__dirname, "lib", "adapters", _options.adapter);
-  var _adapter = require(_module);
-  this._adapter = new _adapter(_options);
+  var _adapterImpl = require(_module);
+  var _adapter = new _adapterImpl(_options);
 
+  Object.defineProperty(this, "_adapter", {
+    get: function() {
+      return _adapter;
+    }
+  });
   Object.defineProperty(this, "adapter", {
     get: function() {
-      return this._adapter.adapter;
+      return _adapter.adapter;
     }
   });
   Object.defineProperty(this, "identity", {
     get: function() {
-      return this._adapter.identity;
+      return _adapter.identity;
     }
   });
 }
