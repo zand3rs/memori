@@ -25,7 +25,7 @@ function Memori(options) {
   });
   Object.defineProperty(this, "adapter", {
     get: function() {
-      return _adapter.adapter;
+      return _adapter.name;
     }
   });
   Object.defineProperty(this, "identity", {

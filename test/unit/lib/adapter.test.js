@@ -5,12 +5,15 @@ describe(TEST_NAME, function() {
   describe("constructor", function() {
     it("accepts params", function() {
       var adapter = new Adapter({
+        adapter: "memory",
         host: "test_host",
         port: 9999,
         db: 1,
         ttl: 8888,
         maxClients: 9
       });
+      expect(adapter.adapter).to.equal("memory");
+      expect(adapter.name).to.equal("memory");
       expect(adapter.host).to.equal("test_host");
       expect(adapter.port).to.equal(9999);
       expect(adapter.db).to.equal(1);
