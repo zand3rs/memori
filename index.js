@@ -91,4 +91,10 @@ Memori.prototype.pop = function(key, done) {
   this._adapter.pop(key, done);
 };
 
+//------------------------------------------------------------------------------
+
+Memori.prototype.expire = function(key, ttl, done) {
+  this._adapter.expire(key, ttl, done);
+};
+
 //==============================================================================

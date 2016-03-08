@@ -81,43 +81,49 @@ describe(TEST_NAME, function() {
 
     describe("#get()", function() {
       it("should throw 'Not supported' error", function() {
-        expect(adapter.set).to.throw(Error, /Not supported!/);
+        expect(adapter.get).to.throw(Error, /Not supported!/);
       });
     });
 
     describe("#del()", function() {
       it("should throw 'Not supported' error", function() {
-        expect(adapter.set).to.throw(Error, /Not supported!/);
+        expect(adapter.del).to.throw(Error, /Not supported!/);
       });
     });
 
     describe("#incr()", function() {
       it("should throw 'Not supported' error", function() {
-        expect(adapter.set).to.throw(Error, /Not supported!/);
+        expect(adapter.incr).to.throw(Error, /Not supported!/);
       });
     });
 
     describe("#decr()", function() {
       it("should throw 'Not supported' error", function() {
-        expect(adapter.set).to.throw(Error, /Not supported!/);
+        expect(adapter.decr).to.throw(Error, /Not supported!/);
       });
     });
 
     describe("#keys()", function() {
       it("should throw 'Not supported' error", function() {
-        expect(adapter.set).to.throw(Error, /Not supported!/);
+        expect(adapter.keys).to.throw(Error, /Not supported!/);
       });
     });
 
     describe("#push()", function() {
       it("should throw 'Not supported' error", function() {
-        expect(adapter.set).to.throw(Error, /Not supported!/);
+        expect(adapter.push).to.throw(Error, /Not supported!/);
       });
     });
 
     describe("#pop()", function() {
       it("should throw 'Not supported' error", function() {
-        expect(adapter.set).to.throw(Error, /Not supported!/);
+        expect(adapter.pop).to.throw(Error, /Not supported!/);
+      });
+    });
+
+    describe("#expire()", function() {
+      it("should throw 'Not supported' error", function() {
+        expect(adapter.expire).to.throw(Error, /Not supported!/);
       });
     });
 

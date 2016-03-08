@@ -51,7 +51,7 @@ describe(TEST_NAME, function() {
       fakeAdapter = mock(cache._adapter);
     });
 
-    ["set", "get", "del", "incr", "decr", "keys", "push", "pop"].forEach(function(method) {
+    ["set", "get", "del", "incr", "decr", "keys", "push", "pop", "expire"].forEach(function(method) {
       it("should call the adapter method: " + method + "()", function() {
         fakeAdapter.expects(method).once();
         cache[method]();
