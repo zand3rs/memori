@@ -324,7 +324,14 @@ describe(TEST_NAME, function() {
 
   describe("#expire()", function() {
     before(function(done) {
-      memory.set("to_expire1", "to_expire value1", done);
+      async.series([
+        function(next) {
+          memory.set("to_expire1", "to_expire value1", next);
+        },
+        function(next) {
+          memory.push("to_expire_q1", "to_expire_q value1", next);
+        }
+      ], done);
     });
 
     it("should set the ttl of existing key", function(done) {
@@ -333,6 +340,20 @@ describe(TEST_NAME, function() {
         expect(result).to.equal(1);
         setTimeout(function() {
           memory.get("to_expire1", function(err, value) {
+            expect(err).to.not.exist;
+            expect(value).to.not.exist;
+            done();
+          });
+        }, 1000);
+      });
+    });
+
+    it("should set the ttl of existing list key", function(done) {
+      memory.expire("to_expire_q1", 1, function(err, result) {
+        expect(err).to.not.exist;
+        expect(result).to.equal(1);
+        setTimeout(function() {
+          memory.get("to_expire_q1", function(err, value) {
             expect(err).to.not.exist;
             expect(value).to.not.exist;
             done();
