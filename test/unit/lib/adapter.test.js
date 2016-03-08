@@ -64,67 +64,32 @@ describe(TEST_NAME, function() {
     });
   });
 
-  describe("methods and properties", function() {
+  describe("public methods", function() {
     var adapter = null;
     var defaultPrefix = "";
+    var methods = ["set", "get", "del", "incr", "decr", "keys", "push", "pop", "expire"];
 
     before(function() {
       adapter = new Adapter();
       defaultPrefix = adapter.prefix;
     });
 
-    describe("#set()", function() {
-      it("should throw 'Not supported' error", function() {
-        expect(adapter.set).to.throw(Error, /Not supported!/);
+    methods.forEach(function(method) {
+      describe("#" + method + "()", function() {
+        it("should throw 'Not supported' error", function() {
+          expect(adapter[method]).to.throw(Error, /Not supported!/);
+        });
       });
     });
+  });
 
-    describe("#get()", function() {
-      it("should throw 'Not supported' error", function() {
-        expect(adapter.get).to.throw(Error, /Not supported!/);
-      });
-    });
+  describe("private methods", function() {
+    var adapter = null;
+    var defaultPrefix = "";
 
-    describe("#del()", function() {
-      it("should throw 'Not supported' error", function() {
-        expect(adapter.del).to.throw(Error, /Not supported!/);
-      });
-    });
-
-    describe("#incr()", function() {
-      it("should throw 'Not supported' error", function() {
-        expect(adapter.incr).to.throw(Error, /Not supported!/);
-      });
-    });
-
-    describe("#decr()", function() {
-      it("should throw 'Not supported' error", function() {
-        expect(adapter.decr).to.throw(Error, /Not supported!/);
-      });
-    });
-
-    describe("#keys()", function() {
-      it("should throw 'Not supported' error", function() {
-        expect(adapter.keys).to.throw(Error, /Not supported!/);
-      });
-    });
-
-    describe("#push()", function() {
-      it("should throw 'Not supported' error", function() {
-        expect(adapter.push).to.throw(Error, /Not supported!/);
-      });
-    });
-
-    describe("#pop()", function() {
-      it("should throw 'Not supported' error", function() {
-        expect(adapter.pop).to.throw(Error, /Not supported!/);
-      });
-    });
-
-    describe("#expire()", function() {
-      it("should throw 'Not supported' error", function() {
-        expect(adapter.expire).to.throw(Error, /Not supported!/);
-      });
+    before(function() {
+      adapter = new Adapter();
+      defaultPrefix = adapter.prefix;
     });
 
     describe("#_getKey()", function() {

@@ -41,6 +41,7 @@ describe(TEST_NAME, function() {
   describe("instance methods", function() {
     var cache = null;
     var fakeAdapter = null;
+    var methods = ["set", "get", "del", "incr", "decr", "keys", "push", "pop", "expire"];
 
     before(function() {
       var FakeMemori = function() {
@@ -51,13 +52,28 @@ describe(TEST_NAME, function() {
       fakeAdapter = mock(cache._adapter);
     });
 
-    ["set", "get", "del", "incr", "decr", "keys", "push", "pop", "expire"].forEach(function(method) {
+    methods.forEach(function(method) {
       it("should call the adapter method: " + method + "()", function() {
         fakeAdapter.expects(method).once();
         cache[method]();
         fakeAdapter.verify();
       });
     });
+  });
+
+  describe("adapters", function() {
+    var shared = require("./shared.test.js");
+    var adapters = ["memory", "redis"];
+
+    _.forEach(adapters, function(adapter) {
+      describe(adapter + " adapter", function() {
+        before(function() {
+          this.adapter = new Memori({ adapter: adapter });
+        });
+        shared.shouldBehaveLikeAdapter();
+      });
+    });
+
   });
 
 });
