@@ -152,6 +152,16 @@ cache.pop("queue", function(err, value) {
 });
 ```
 
+### expire(key, ttl, callback)
+
+Set the ttl of a key. The ttl unit is in seconds.
+
+```javascript
+cache.expire("key", 10, function(err, result) {
+  console.log(err, result);
+});
+```
+
 ## Properties
 
 ### adapter
