@@ -322,4 +322,32 @@ describe(TEST_NAME, function() {
     });
   });
 
+  describe("#expire()", function() {
+    before(function(done) {
+      memory.set("to_expire1", "to_expire value1", done);
+    });
+
+    it("should set the ttl of existing key", function(done) {
+      memory.expire("to_expire1", 1, function(err, result) {
+        expect(err).to.not.exist;
+        expect(result).to.equal(1);
+        setTimeout(function() {
+          memory.get("to_expire1", function(err, value) {
+            expect(err).to.not.exist;
+            expect(value).to.not.exist;
+            done();
+          });
+        }, 1000);
+      });
+    });
+
+    it("should return 0 if key does not exist", function(done) {
+      memory.expire("to_expire2", 1, function(err, result) {
+        expect(err).to.not.exist;
+        expect(result).to.equal(0);
+        done();
+      });
+    });
+  });
+
 });
