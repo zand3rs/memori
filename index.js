@@ -48,7 +48,7 @@ Memori.prototype.set = function(key, value, done) {
 //-- fake overloading, this is the real definition
 
 Memori.prototype.set = function(key, value, ttl, done) {
-  var _ttl = _.find([ttl], _.isFinite);
+  var _ttl = _.find([ttl], _.isSafeInteger);
   var _done = _.find([ttl, done], _.isFunction);
 
   this._adapter.set(key, value, _ttl, function(err, result) {
