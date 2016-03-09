@@ -39,65 +39,85 @@ function Memori(options) {
 //-- public instance methods
 
 Memori.prototype.set = function(key, value, done) {
-  this._adapter.set(key, value, done || _.noop);
+  this._adapter.set(key, value, function(err, result) {
+    done && done(err, result);
+  });
 };
 
 //------------------------------------------------------------------------------
 //-- fake overloading, this is the real definition
 
 Memori.prototype.set = function(key, value, ttl, done) {
-  var _ttl = _.detect([ttl], _.isNumber);
-  var _done = _.detect([ttl, done, _.noop], _.isFunction);
+  var _ttl = _.find([ttl], _.isFinite);
+  var _done = _.find([ttl, done], _.isFunction);
 
-  this._adapter.set(key, value, _ttl, _done);
+  this._adapter.set(key, value, _ttl, function(err, result) {
+    _done && _done(err, result);
+  });
 };
 
 //------------------------------------------------------------------------------
 
 Memori.prototype.get = function(key, done) {
-  this._adapter.get(key, done || _.noop);
+  this._adapter.get(key, function(err, result) {
+    done && done(err, result);
+  });
 };
 
 //------------------------------------------------------------------------------
 
 Memori.prototype.del = function(key, done) {
-  this._adapter.del(key, done || _.noop);
+  this._adapter.del(key, function(err, result) {
+    done && done(err, result);
+  });
 };
 
 //------------------------------------------------------------------------------
 
 Memori.prototype.incr = function(key, done) {
-  this._adapter.incr(key, done || _.noop);
+  this._adapter.incr(key, function(err, result) {
+    done && done(err, result);
+  });
 };
 
 //------------------------------------------------------------------------------
 
 Memori.prototype.decr = function(key, done) {
-  this._adapter.decr(key, done || _.noop);
+  this._adapter.decr(key, function(err, result) {
+    done && done(err, result);
+  });
 };
 
 //------------------------------------------------------------------------------
 
 Memori.prototype.keys = function(pattern, done) {
-  this._adapter.keys(pattern, done || _.noop);
+  this._adapter.keys(pattern, function(err, result) {
+    done && done(err, result);
+  });
 };
 
 //------------------------------------------------------------------------------
 
 Memori.prototype.push = function(key, value, done) {
-  this._adapter.push(key, value, done || _.noop);
+  this._adapter.push(key, value, function(err, result) {
+    done && done(err, result);
+  });
 };
 
 //------------------------------------------------------------------------------
 
 Memori.prototype.pop = function(key, done) {
-  this._adapter.pop(key, done, _.noop);
+  this._adapter.pop(key, function(err, result) {
+    done && done(err, result);
+  });
 };
 
 //------------------------------------------------------------------------------
 
 Memori.prototype.expire = function(key, ttl, done) {
-  this._adapter.expire(key, ttl, done || _.noop);
+  this._adapter.expire(key, ttl, function(err, result) {
+    done && done(err, result);
+  });
 };
 
 //==============================================================================

@@ -4,49 +4,49 @@ exports.shouldBehaveLikeAdapter = function() {
     it("should store value into cache using the given key", function(done) {
       this.adapter.set("instance_key", "instance value", function(err, result) {
         expect(err).to.not.exist;
-        expect(result).to.equal("OK");
+        expect(result).to.equal(1);
         done();
       });
     });
     it("should store value into cache using the given key and ttl", function(done) {
       this.adapter.set("instance_key2", "instance value2", 300, function(err, result) {
         expect(err).to.not.exist;
-        expect(result).to.equal("OK");
+        expect(result).to.equal(1);
         done();
       });
     });
     it("should store integers", function(done) {
       this.adapter.set("integer", 1, function(err, result) {
         expect(err).to.not.exist;
-        expect(result).to.equal("OK");
+        expect(result).to.equal(1);
         done();
       });
     });
     it("should store floats", function(done) {
       this.adapter.set("float", 1.2, function(err, result) {
         expect(err).to.not.exist;
-        expect(result).to.equal("OK");
+        expect(result).to.equal(1);
         done();
       });
     });
     it("should store booleans", function(done) {
       this.adapter.set("bool", false, function(err, result) {
         expect(err).to.not.exist;
-        expect(result).to.equal("OK");
+        expect(result).to.equal(1);
         done();
       });
     });
     it("should store arrays", function(done) {
       this.adapter.set("array", [1, "2", 3.4], function(err, result) {
         expect(err).to.not.exist;
-        expect(result).to.equal("OK");
+        expect(result).to.equal(1);
         done();
       });
     });
     it("should store objects", function(done) {
       this.adapter.set("object", {data: {string: "string", integer: 9}}, function(err, result) {
         expect(err).to.not.exist;
-        expect(result).to.equal("OK");
+        expect(result).to.equal(1);
         done();
       });
     });
