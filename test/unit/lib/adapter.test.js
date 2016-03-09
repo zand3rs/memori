@@ -129,6 +129,42 @@ describe(TEST_NAME, function() {
         expect(adapter._decode(prefix + JSON.stringify({key: 3}))).to.eql({key: 3});
       });
     });
+
+    describe("#_error()", function() {
+      it("should return error instance", function() {
+        var err1 = new Error("Test Error");
+        var err2 = "Test Error";
+        var err3 = ["Test", "Error"];
+        var err4 = { message: "Test Error" };
+        var err5 = null;
+        var err6 = "";
+        var err7 = 0;
+        var err8 = undefined;
+
+        expect(adapter._error(err1)).to.equal(err1);
+        expect(adapter._error(err2)).to.be.an.instanceof(Error).with.property("message", "Test Error");
+        expect(adapter._error(err3)).to.be.an.instanceof(Error).with.property("message", "Test, Error");
+        expect(adapter._error(err4)).to.be.an.instanceof(Error).with.property("message", "Test Error");
+        expect(adapter._error(err5)).to.be.null;
+        expect(adapter._error(err6)).to.be.null;
+        expect(adapter._error(err5)).to.be.null;
+        expect(adapter._error(err7)).to.be.null;
+        expect(adapter._error(err8)).to.be.null;
+      });
+    });
+
+    describe("#_success()", function() {
+      it("should return success value", function() {
+        expect(adapter._success("OK")).to.equal(1);
+        expect(adapter._success(1)).to.equal(1);
+        expect(adapter._success(2)).to.equal(2);
+        expect(adapter._success("3")).to.equal(3);
+        expect(adapter._success(4.2)).to.equal(4);
+        expect(adapter._success(null)).to.equal(0);
+        expect(adapter._success("")).to.equal(0);
+        expect(adapter._success(NaN)).to.equal(0);
+      });
+    });
   });
 
 });
