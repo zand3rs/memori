@@ -101,6 +101,18 @@ Memori.prototype.decr = function(key, done) {
 };
 
 //------------------------------------------------------------------------------
+//-- fake overloading, this is the real definition
+
+Memori.prototype.decr = function(key, value, done) {
+  var _value = _.find([value], _.isSafeInteger);
+  var _done = _.find([value, done], _.isFunction);
+
+  this._adapter.decr(key, value, function(err, result) {
+    _done && _done(err, result);
+  });
+};
+
+//------------------------------------------------------------------------------
 
 Memori.prototype.keys = function(pattern, done) {
   this._adapter.keys(pattern, function(err, result) {

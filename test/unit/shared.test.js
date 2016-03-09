@@ -193,24 +193,28 @@ exports.shouldBehaveLikeAdapter = function() {
       this.adapter.del("counter", done);
     });
 
-    it("should decrement value using the given key", function(done) {
-      var self = this;
-      async.series([
-        function(next) {
-          self.adapter.decr("counter", function(err, value) {
-            expect(err).to.not.exist;
-            expect(value).to.equal(-1);
-            next();
-          });
-        },
-        function(next) {
-          self.adapter.decr("counter", function(err, value) {
-            expect(err).to.not.exist;
-            expect(value).to.equal(-2);
-            next();
-          });
-        }
-      ], done);
+    it("should set non-existent key to 0 before decrementing value", function(done) {
+      this.adapter.decr("counter", function(err, value) {
+        expect(err).to.not.exist;
+        expect(value).to.equal(-1);
+        done();
+      });
+    });
+
+    it("should decrement value stored in key by 1", function(done) {
+      this.adapter.decr("counter", function(err, value) {
+        expect(err).to.not.exist;
+        expect(value).to.equal(-2);
+        done();
+      });
+    });
+
+    it("should decrement value stored in key by the given value", function(done) {
+      this.adapter.decr("counter", 8, function(err, value) {
+        expect(err).to.not.exist;
+        expect(value).to.equal(-10);
+        done();
+      });
     });
   });
 
