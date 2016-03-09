@@ -186,6 +186,14 @@ exports.shouldBehaveLikeAdapter = function() {
         done();
       });
     });
+
+    it("should allow negative increments", function(done) {
+      this.adapter.incr("counter", -2, function(err, value) {
+        expect(err).to.not.exist;
+        expect(value).to.equal(8);
+        done();
+      });
+    });
   });
 
   describe("#decr()", function() {
@@ -213,6 +221,14 @@ exports.shouldBehaveLikeAdapter = function() {
       this.adapter.decr("counter", 8, function(err, value) {
         expect(err).to.not.exist;
         expect(value).to.equal(-10);
+        done();
+      });
+    });
+
+    it("should allow negative decrements", function(done) {
+      this.adapter.decr("counter", -2, function(err, value) {
+        expect(err).to.not.exist;
+        expect(value).to.equal(-8);
         done();
       });
     });
