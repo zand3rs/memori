@@ -99,22 +99,32 @@ cache.del(["key1", "key2"], function(err, result) {
 ```
 
 ### incr(key, callback)
+### incr(key, value, callback)
 
-Increments the number stored at key by one. If the key does not exist, it is set to 0 before performing the operation.
+Increments the number stored at key by value (defaults to 1 if not provided). If the key does not exist, it is set to 0 before performing the operation.
 
 ```javascript
-cache.incr("counter", function(err, value) {
-  console.log(err, value);
+cache.incr("counter", function(err, result) {
+  console.log(err, result);
+});
+
+cache.incr("counter", 5, function(err, result) {
+  console.log(err, result);
 });
 ```
 
 ### decr(key, callback)
+### decr(key, value, callback)
 
-Decrements the number stored at key by one. If the key does not exist, it is set to 0 before performing the operation.
+Decrements the number stored at key by value (defaults to 1 if not provided). If the key does not exist, it is set to 0 before performing the operation.
 
 ```javascript
-cache.decr("counter", function(err, value) {
-  console.log(err, value);
+cache.decr("counter", function(err, result) {
+  console.log(err, result);
+});
+
+cache.decr("counter", 5, function(err, result) {
+  console.log(err, result);
 });
 ```
 
@@ -154,7 +164,7 @@ cache.pop("queue", function(err, value) {
 
 ### expire(key, ttl, callback)
 
-Set the ttl of a key. The ttl unit is in seconds.
+Set the timeout of a key. The ttl unit is in seconds.
 
 ```javascript
 cache.expire("key", 10, function(err, result) {
@@ -200,7 +210,7 @@ var cache = new Memori({
   port: 6379,
   db: 1, //-- use db 1 instead of the default 0
   ttl: 300, //-- set default ttl to 300 secs (5mins)
-  prefix: "my_cache:", //-- set key prefix
+  prefix: "my_cache", //-- set key prefix
   identity: "my_identity" //-- for additional cache key uniqueness
 });
 ```
