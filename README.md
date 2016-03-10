@@ -31,6 +31,10 @@ cache.set("number", 2, function(err, result) {
 cache.set("object", { data: { key: "val" } }, function(err, result) {
   console.log(err, result);
 });
+//-- expire in 10 seconds
+cache.set("array", [1, 2, 3], 10, function(err, result) {
+  console.log(err, result);
+});
 
 //-- get
 cache.get("string", function(err, value) {
@@ -45,6 +49,10 @@ cache.get("object", function(err, value) {
   //-- value: { data: { key: "val" } }
   console.log(err, value);
 });
+cache.get("array", function(err, value) {
+  //-- value: [1, 2, 3]
+  console.log(err, value);
+});
 ```
 
 ## Methods
@@ -52,7 +60,7 @@ cache.get("object", function(err, value) {
 ### set(key, value, callback)
 ### set(key, value, ttl, callback)
 
-Set the value of key. If key already holds a value, it is overwritten, regardless of its type. Any previous time to live associated with the key is discarded on successful operation. The ttl unit is in seconds and value could be of any data type. If ttl is not provided, the default ttl of 0 is used which means no expiration.
+Set the value of key. If key already holds a value, it is overwritten, regardless of its type. Any previous time to live associated with the key is discarded on successful operation. The ttl unit is in seconds and value could be of any data type. If ttl is not provided, the default 0 (no expiration) or whatever provided in the constructor options will be used.
 
 ```javascript
 //-- set key without expiration
@@ -209,7 +217,7 @@ var cache = new Memori({
   host: "localhost",
   port: 6379,
   db: 1, //-- use db 1 instead of the default 0
-  ttl: 300, //-- set default ttl to 300 secs (5mins)
+  ttl: 300, //-- set the default ttl to 300 secs; defaults to 0 when not provided
   prefix: "my_cache", //-- set key prefix
   identity: "my_identity" //-- for additional cache key uniqueness
 });
