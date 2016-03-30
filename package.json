@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "lodash": "~4.6.1",
-    "redis": "~0.12.1"
+    "redis": "~2.5.3"
   },
   "devDependencies": {
     "async": "~1.4.2",
