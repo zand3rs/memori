@@ -206,6 +206,8 @@ The constructor accepts the ff. options:
 * host
 * port
 * db
+* user or username
+* password or pass
 * ttl
 * prefix
 * identity
@@ -216,6 +218,7 @@ var cache = new Memori({
   adapter: "redis", //-- defaults to "memory" when not provided
   host: "localhost",
   port: 6379,
+  password: "abc123", //-- use password to authenticate if not empty
   db: 1, //-- use db 1 instead of the default 0
   ttl: 300, //-- set the default ttl to 300 secs; defaults to 0 when not provided
   prefix: "my_cache", //-- set key prefix
